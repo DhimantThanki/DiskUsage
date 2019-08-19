@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#author: Dhimant Thanki 
+#Date:Tuesday 20 August 2019 12:00:40 AM IST
+#Description: Behold the power of AWK command doing disk checking easily without any loops and without formatting the input to compare
+
+df -h | awk '+$5 >= 90 {print}'
