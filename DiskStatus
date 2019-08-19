@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#author: Dhimant Thanki 
+#Date:Monday 19 August 2019 09:37:09 PM IST
+#Description:Script for checking Disk usage
+
+
+clear
+BOLD='\033[1m'
+NONE='\033[00m'
+RED='\033[01;31m'
+
+df -h | egrep -v "tmpfs|devtmpfs" | sed '1d' | awk '{print $1,$5}' | sed 's/%//' | while read usage 
+do
+	usageP=`echo $usage | awk '{print $2}'`
+	partition=`echo $usage | awk '{print $1}'`
+	if [ $usageP -ge 18 ]
+	then	
+		echo -e ${BOLD} ${RED} "$partition HAS REACHED $usageP% \n"${NONE}
+		echo -e "`df -h | egrep -w "Used|$partition"` \n\n"
+	fi
+done
